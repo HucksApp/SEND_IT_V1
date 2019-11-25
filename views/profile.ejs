@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="content-type" content="text/html"; charset="utf-8"/>
+    <meta http-equiv="refresh" content="300"/>
+    <title><img src="">Profile</title>
+    <link href="profile.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <!--item and order edit page-->
+    <%include partials/nav%>
+    <section>
+      <div class="nav_container">
+        <div>
+          <h3><!--inject the username--><%=user.username || user.displayName%><img src="icons/icons8-user-account-50.png"></h3>
+        </div>
+        <div class="orders">
+          <ul>
+            <!--item lists-->
+            <%if (user.order.length!=0){for (i of user.order){%>
+            <li>
+
+
+              <article class="order <%=i.count%>" >
+              <p>ORDER <span><%=i.count%></span></p>
+              <p>Location:<%=i.location%><p>
+                <p><%=i.date%><p>
+              <%if (user.order.delivery==false){%>
+              <p>Delivey status</p>
+              <p>Pending</p><%}else{%>
+                <p>Delivey status</p>
+                <p>Pending</p><%}%>
+              <img class="odel" src="icons/icons8-delete-60.png">
+            </article>
+
+          </li>
+          <%}}else{%>
+
+                <article class="order" >
+                <p>You have no Order in stock</p>
+                  </article>
+
+                  <%}%>
+
+
+          </ul>
+        </div>
+      </div>
+    </section>
+    <%include partials/socials%>
+    <script src='fronthandeler/profile.js'></script>
+  </body>
+  </html>

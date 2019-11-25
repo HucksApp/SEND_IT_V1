@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta  http-equiv="content-type" content="text/html" charset="utf-8"/>
+    <meta  name="author" content="HucksApp ">
+    <title><img src=""></title>
+    <link href="checkout.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <%include partials/nav%>
+
+    <section>
+      <div  id="user">
+      <%if (user){%>  <h3><span><img src="icons/icons8-user-account-50.png"></span><%=user.displayName || user.username%></h3>
+      <%}else{%><h3><span><img src="icons/icons8-user-account-50.png"></span>Unknown User</h3>
+      <%}%>
+      </div>
+      <div class='gen_wrapper'>
+        <div class="order">
+        <h3>Orders</h3>
+        </div>
+        <div class='item_wrap'>
+
+          <% if (user && user.order && user.order.length!==0){ m=1;  for( i of user.order){ %>
+
+
+        <div class="item orderList">
+          <div class ="log">Order <%=m%></div>
+          <div><%=i.date%></div></div>
+
+          <%for (n of i.order){ %>
+
+            <div class="item <%=i.count+'order'%>">
+              <div class ="log"><%=n%></div>
+              <div>date/time/other information</div>
+              <img class="idel" src="icons/icons8-multiply-50.png"></div>
+
+              <%}%>
+
+            <%m++;}}else{%>
+              <div class="item">
+                <div class ="log">Pls Create Order At The  Store!!!!</div>
+                <div>If you are signed in</div>
+                <img class="idel" src="icons/icons8-multiply-50.png"></div>
+
+
+                  <%}%>
+        </div>
+        <div class=" adress">
+          <h4>Address</h4>
+          <p class='shown'><%=user.address%><!--to be replced with a text area on click for edit--></p>
+          <img id="edit" src="icons/icons8-save-as-50.png">
+          <div class="update hidden">
+            <textarea  id="addressedit" rows="8" cols="30">type in your address</textarea>
+            <img  id='update' src="icons/icons8-replace-50.png">
+          </div>
+        </div>
+      </div>
+    </section>
+    <%include partials/socials%>
+    <script src="fronthandeler/checkout.js"></script>
+  </body>
+</html>

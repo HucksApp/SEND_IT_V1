@@ -1,0 +1,138 @@
+body{
+  padding;0;
+  margin:0;
+  box-sizing: border-box;
+  font-family: fantasy;
+
+}
+
+/***for partial nav**/
+nav{
+  color:orange;
+  font-size: 15px;
+  background-color:#fff;
+  display:flex;
+}
+
+nav div{
+  flex:1;
+  display:flex;
+  font:10px;
+}
+
+.user_nav {
+  margin-left:30%;
+  margin-right:0;
+
+}
+.user_nav div{
+  padding:0;
+}
+
+nav div p:hover{
+  border-bottom: solid #0a0;
+}
+a{
+  text-decoration: none;
+  color:orange;
+}
+
+/**************************/
+
+
+
+.items-wrapper{
+  background-image: -webkit-linear-gradient(170deg,#ffecd2 20%,#fcb69f 80%,#ffc3a0 100%);
+  /*border: solid black;*/
+  justify-content: space-around;
+  align-items:center;
+  display:flex;
+
+
+  height:100vh;
+}
+
+.item{
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 7px;
+  border:solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+  height: 60%;
+  display:flex;
+  flex-direction: column;
+  margin:5%;
+  -webkit-transition: align-self 4s;
+
+}
+
+.newset{
+  display:!important flex;
+  transform: translate(0px, 0px);
+  -webkit-animation-name: an;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 0.5s ;
+  -webkit-animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes an {
+  0%{display;flex; transform: translate( 0%,-5%);}
+  25%{display;flex; transform: translate(0%,-15%);}
+  35%{display;flex; transform: translate(0%,-25%);}
+  45%{display;flex; transform: translate(0%,-30%);}
+  60%{display;flex; transform: translate(0%,-25%);}
+  75%{display;flex; transform: translate(0%,-10%);}
+  100%{display;none; transform: translate(0%,-2%);}
+
+}
+.other{
+
+  display:none;
+}
+
+
+.item:hover{
+align-self:flex-end;
+
+}
+.item .names_values{
+  color:#fff;
+  background-image: -webkit-linear-gradient( right,#3a1c71, #d76d77, #ffaf7b);
+  height:40%;
+
+}
+
+.store_out:hover{
+  transform: scale(0.8,0.8);
+
+}
+
+.item .names_values p{
+  border-bottom: solid #fff;
+  border-radius: 50%;
+}
+
+.description{
+  padding:5%;
+  color: orange;
+}
+
+#wrapcount{
+  margin-left:2%;
+  color:orange;
+}
+
+/*********footer design************/
+
+footer{
+  display:flex;
+  justify-content: space-around;
+  font-family: inherit;
+  color: orange;
+}
+
+footer img:hover{
+  transform:scale(0.9, 0.9);
+  cursor: pointer;
+}
+
+/***********************/

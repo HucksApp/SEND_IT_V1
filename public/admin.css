@@ -1,0 +1,140 @@
+body{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: fantasy;
+  color:#fff;
+}
+
+.adminInfo{
+  background-color: blue;
+  color:white;
+  display:flex;
+  justify-content: space-around;
+  align-items: stretch;
+  border:solid blue;
+}
+
+.userInfoTog{
+  background-color: blue;
+  margin-top: 0;
+  border-top:solid blue;
+  border-bottom:solid #00f;
+  color:#fff;
+  text-align: center;
+}
+.userInfo{
+  background-color: rgba(0,0,255,0.2);
+  margin: 0% 5%;
+  border:#fff;
+  overflow: hidden;
+  height: 0vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: solid rgba(255,255,255,0.4);
+  transition: height 2s;
+}
+.userInfo.open{
+  background-color: rgba(0,0,255,0.2);
+  margin: 0% 5%;
+  border:#fff;
+  overflow: scroll;
+  height: 100vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: solid rgba(255,255,255,0.4);
+  transition: height 2s;
+
+}
+
+
+.rUser,.gUser{
+  display:flex;
+  justify-content:space-around;
+  align-content: stretch;
+  height: 10vh;
+  border: solid rgba(255,255,255,0.4);
+
+}
+
+.rUser>* , .gUser>*{
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+
+}
+
+.userInfoTog p:hover{
+  background-color: rgba(0,0,255,0.3);
+  box-shadow: 1px 1px 1px 1px #000;
+  cursor: pointer;
+
+}
+.addBtn{
+  color:#b19cd9;
+}
+
+.btn:hover{
+  color:#00f;
+  border-bottom: solid #00f;
+  cursor: pointer;
+}
+
+
+.rUser div:first-child,.gUser div:first-child{
+  color:blue;
+}
+
+.tog:hover img{
+  transform:rotate(90deg);
+  transition: all 1s;
+
+}
+
+
+.addArea,.btnSub{
+  border:hidden;
+  background-color: inherit;
+  color:#fff;
+  font-family: inherit;
+
+
+}
+.btnSub{
+  margin-left:25%;
+}
+
+
+.btnSub:hover{
+  transform: rotate(360deg);
+  transition:2s;
+}
+
+.status{
+  background-color:#00f;
+  margin-right: 30%;
+  color:#fff;
+}
+
+
+.btnSub2{
+background-color: inherit;
+border: hidden;
+}
+
+.btnSub2:hover{
+  transform: rotate(360deg);
+  transition:1.5s;
+}
+a{
+  text-decoration: none;
+  color:#fff;
+
+}
+
+a:hover{
+  box-shadow: 1px 1px 1px 1px #000;
+  cursor: pointer;
+}

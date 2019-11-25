@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><img src="">Admin</title>
+    <link href="admin.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <section class="adminInfo">
+        <h2>Admin<img src="icons/icons8-admin-settings-male-50.png"></h2>
+        <p><%=allData.admin.Admin.name.type%><p>
+        <p><%=allData.admin.Admin.email%><p>
+            <p><a href="/logout">Logout</a></p>
+      </section>
+      <section class="userInfoTog">
+        <p class="tog">Users<img id="togBtb"  src="icons/icons8-menu-20.png"></p>
+    </section>
+
+
+
+    <section class="userInfo">
+      <%for (i of allData.andUsers) {
+
+          for (n of i.order ){  %>
+      <div class="regularsignup">
+        <div class="rUser <%=i.email%> <%=n.count%>" >
+          <div>Order<%=n.count%></div>
+          <div><%=i.username%>: <%=n.date%></div>
+          <div class="btn addBtn">location: <%=n.location%></div>
+          <div class="btn stBtn">
+            delivery:<%if (n.delivery==false){%>pending<%}else{%> delivered
+            <%}%>
+        </div>
+        </div>
+      </div>
+      <%}}%>
+      <%for (i of allData.gogUsers) {
+
+          for (n of i.order ){  %>
+      <div class="regularsignup">
+        <div class="rUser <%=i.id%> <%=n.count%>">
+          <div>Order<%=n.count%></div>
+          <div><%=i.displayName%>: <%=n.date%></div>
+          <div class="btn addBtn">location: <%=n.location%></div>
+          <div class="btn stBtn">
+            delivery:<%if (n.delivery==false){%>pending<%}else{%> delivered
+            <%}%>
+        </div>
+        </div>
+      </div>
+      <%}}%>
+    </section>
+
+      <script src="/fronthandeler/admin.js"></script>
+  </body>
+</html>

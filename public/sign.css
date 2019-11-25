@@ -1,0 +1,105 @@
+Body{
+  padding:0;
+  margin:0;
+  font-family: fantasy;
+}
+
+section{
+  display:flex;
+  background-image:-webkit-linear-gradient(170deg,#ffecd2 20%,#fcb69f 80%,#ffc3a0 100%);
+  height:100vh;
+  justify-content: space-around;
+  color:white;
+
+
+
+}
+body p:nth-child(2){
+  margin-left: 5%;
+  color:orange;
+}
+
+
+section > *{
+  margin:5%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 7px;
+  border:solid rgba(255, 255, 255, 0.5);
+  padding:5%;
+  flex-grow: 1;
+  flex:1;
+  flex-basis: auto;
+
+}
+
+
+.btn:hover,.icons_r:hover{
+  transform:scale(0.8,0.8);
+  cursor: pointer;
+}
+
+.btn{
+background: inherit;
+  border:hidden;
+}
+
+
+
+input,textarea{
+  border:hidden;
+  background-color: rgba(255, 255, 255, 0.4);
+  font-family: fantasy;
+  color:orange;
+
+}
+
+
+
+/***for partial nav**/
+nav{
+  color:orange;
+  font-size: 15px;
+  background-color:#fff;
+  display:flex;
+}
+
+nav div{
+  flex:1;
+  display:flex;
+  font:10px;
+}
+
+.user_nav {
+  margin-left:30%;
+  margin-right:0;
+
+}
+.user_nav div{
+  padding:0;
+}
+
+nav div p:hover{
+  border-bottom: solid #0a0;
+}
+a{
+  text-decoration: none;
+  color:orange;
+}
+
+/**************************/
+
+/*********footer design************/
+
+footer{
+  display:flex;
+  justify-content: space-around;
+  font-family: inherit;
+  color: orange;
+}
+
+footer img:hover{
+  transform:scale(0.9, 0.9);
+  cursor: pointer;
+}
+
+/***********************/

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="content-type" content="text/html" ;charset="utf-8"/>
+    <meta  name="keywords" content="test,app_shop"/>
+    <meta  name="description" content="this is a test app"/>
+    <meta  name="author" content="HuckApps"/>
+
+    <title><img src=""/>app Home</title>
+    <link href="test1.css" rel="stylesheet" type="text/css"/ >
+  </head>
+  <body>
+    <%include partials/nav %>
+    <!--inject the navigation at this point-->
+    <div class="wrapper">
+      <header>
+        <img  class="logo top" src="icons/thoth_logo.png" width="100px" height="100px"/>
+        <hgroup>
+          <p  class="top">menu<span><img  class="menubtn" src="icons/icons8-menu-20.png"></span>
+          </p>
+          <!--hidden in the menu-->
+          <div class="menuclosed" id="in-nav">
+            <div >
+            <a href="/sign">
+              <h3>Sign in</h3>
+              <p>Already a user </p>
+            </a>
+            </div>
+            <div>
+            <a href="sign">
+              <h3>Sign up</h3>
+              <p> for free</p>
+            </a>
+            </div>
+            <div>
+              <h3><a href="/profile">About</a></h3>
+            </div>
+            <div>
+              <h3><a href="/store">Store</a></h3>
+            </div>
+            <div>
+              <h3><a href="/account">Account</a></h3>
+            </div>
+          </div>
+        </hgroup>
+        </header>
+      <section>
+          <div>
+          <h2>HuckApps</h2>
+          <p>Experience the new world</p>
+          </div>
+          <div><img class="display" src="icons/99433-removebg-preview.png"></div>
+      </section>
+      <!--inject the social footer-->
+    </div>
+    <%include partials/socials %>
+    <script src="fronthandeler/live.js"></script>
+  </body>
+</html>

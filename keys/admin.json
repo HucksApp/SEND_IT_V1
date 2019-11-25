@@ -1,0 +1,20 @@
+
+
+
+{
+
+        "Admin":{
+
+            "name":{
+
+              "type":"HucksApp"
+
+            },
+
+            "email":"jakehunt000000@gmail.com",
+
+            "password":{"type":"Pussypie"}
+
+        }
+
+}

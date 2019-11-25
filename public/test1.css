@@ -1,0 +1,140 @@
+body{
+  margin:0;
+  padding:0;
+  color:#fff;
+  box-sizing: border-box;
+  font-family:fantasy;
+}
+/***for partial nav**/
+nav{
+  color:orange;
+  font-size: 15px;
+  background-color:#fff;
+  display:flex;
+}
+
+nav div{
+  flex:1;
+  display:flex;
+  font:10px;
+}
+
+.user_nav {
+  margin-left:30%;
+  margin-right:0;
+
+}
+.user_nav div{
+  padding:0;
+}
+
+nav div p:hover{
+  border-bottom: solid #0a0;
+}
+a{
+  text-decoration: none;
+  color:orange;
+}
+
+/**************************/
+.wrapper{
+    background-image:-webkit-linear-gradient(170deg,#ffecd2 20%,#fcb69f 80%,#ffc3a0 100%);
+}
+header{
+}
+
+hgroup{
+  position:absolute;
+  left:85%;
+  top:40px;
+}
+
+section{
+  text-align: center;
+}
+
+section div:first-child{
+  float:left;
+  width:20%;
+  font-size:1.5em;
+  margin-left: 15%;
+
+
+}
+.menubtn:hover{
+transform:scale(0.8,0.8);
+cursor:pointer;
+
+}
+#in-nav{
+  transition: -webkit-display 9s;
+  color:orange;
+  background-color:rgba(255, 255,255, 0.6);
+  text-align: center;
+
+
+}
+
+#in-nav div{
+  border: solid 2px #fff;
+  box-shadow: 1px 1px 1px 1px #000;
+}
+
+#in-nav div:hover{
+  background-color: #fff;
+  box-shadow: 2px 3px 2px 2px #000;
+
+}
+.menuclosed{
+  display: flex;
+  flex-direction: column;
+  height:0vh;
+  overflow: hidden;
+  transition:height 4s;
+}
+
+.menuclosed.togmenu{
+  display: flex;
+  flex-direction: column;
+      height: 80vh;
+      overflow: hidden;
+      transition:height 4s;
+}
+
+
+
+
+@-webkit-keyframes name {
+  0%{transform:scale(1,1);}
+  20%{transform:scale(1.2,1.2);}
+  50%{transform:scale(1.5,1.5);}
+  80%{transform:scale(1.2,1.2);}
+  90%{transform:scale(1.1,1.1);}
+  100%{transform:scale(1,1);}
+
+}
+
+section div h2{
+  transform:scale(1,1);
+-webkit-animation-name: name;
+-webkit-animation-duration: 8s;
+-webkit-animation-delay:2s;
+-webkit-animation-iteration-count:3;
+-webkit-animation-timing-function: ease-in;
+}
+
+/*********footer design************/
+
+footer{
+  display:flex;
+  justify-content: space-around;
+  font-family: inherit;
+  color: orange;
+}
+
+footer img:hover{
+  transform:scale(0.9, 0.9);
+  cursor: pointer;
+}
+
+/***********************/

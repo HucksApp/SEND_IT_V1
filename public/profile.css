@@ -1,0 +1,136 @@
+body{
+  font-family: fantasy;
+
+}
+
+/***for partial nav**/
+nav{
+  color:orange;
+  font-size: 15px;
+  background-color:#fff;
+  display:flex;
+}
+
+nav div{
+  flex:1;
+  display:flex;
+  font:10px;
+}
+
+.user_nav {
+  margin-left:30%;
+  margin-right:0;
+
+}
+.user_nav div{
+  padding:0;
+}
+
+nav div p:hover{
+  border-bottom: solid #0a0;
+}
+a{
+  text-decoration: none;
+  color:orange;
+}
+
+
+/**************************/
+
+
+
+section{
+    background-image:-webkit-linear-gradient(170deg,#ffecd2 20%,#fcb69f 80%,#ffc3a0 100%);
+    height:100vh;
+    color:#fff;
+    text-transform: capitalize;
+    overflow: scroll;
+}
+
+.orders ul{
+list-style-type: none;
+background-color: rgba(255, 255, 255, 0.4);
+border:solid rgba(255, 255, 255, 0.5);
+display: flex;
+flex-direction: column;
+
+}
+.orders ul li{
+  display:flex;
+  overflow: scroll;
+}
+
+.order{
+  border-bottom:solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content:space-around;
+  align-items:center;
+
+}
+
+.orders ul li article.order{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+}
+.order> p{
+  border-bottom:rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+}
+
+.order p:first-child{
+  align-self: flex-start;
+  color:orange;
+
+}
+
+.order p span{
+  margin:10px;
+}
+
+.orders ul li article.order p:last-of-type{
+  padding-right: 5%;
+  margin-right: 7%;
+  border-bottom-color: #f00;
+  border-bottom-style: solid;
+  border-bottom-width: 10px;
+}
+.orders ul li article.order p:nth-child(2),.orders ul li article.order p:last-of-type{
+  color:orange;
+}
+.orders ul li article.order p:last-child{
+  border-bottom:rgba(255, 255, 255, 0.5);
+}
+
+.nav_container{
+  padding-left:5%;
+  margin:5%;
+
+}
+.orders ul li article.order img:last-child{
+  align-self: center;
+
+}
+
+.odel:hover{
+  transform: scale(0.7,0.7);
+  border-bottom:solid rgba(255, 255, 255, 0.8);
+  box-shadow: 1px 1px 1px 1px #000;
+  cursor: pointer;
+}
+/*********footer design************/
+
+footer{
+  display:flex;
+  justify-content: space-around;
+  font-family: inherit;
+  color: orange;
+}
+
+footer img:hover{
+  transform:scale(0.9, 0.9);
+}
+
+/***********************/
