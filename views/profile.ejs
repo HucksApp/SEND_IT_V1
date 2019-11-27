@@ -23,7 +23,7 @@
 
               <article class="order <%=i.count%>" >
               <p>ORDER <span><%=i.count%></span></p>
-              <p>Location:<%=i.location%><p>
+              <p><a href="/map?ord=<%=i.count%>">Location:<%=i.location%></a><p>
                 <p><%=i.date%><p>
               <%if (user.order.delivery==false){%>
               <p>Delivey status</p>
@@ -34,6 +34,8 @@
             </article>
 
           </li>
+
+
           <%}}else{%>
 
                 <article class="order" >

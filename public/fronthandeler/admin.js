@@ -24,7 +24,7 @@ if(!this.parentNode.nextSibling.nextSibling){
     this.parentNode.insertAdjacentHTML('afterend',`
                       <div class="rUser toReplace ">
                       <form action="/admin_user_address_update?updated=${toBeUpdated}"   method="post">
-                      <textarea class="addArea" name="location">pls enter the new adress</textarea>
+                      <textarea class="addArea" name="location">example : 1600 Amphitheatre Parkway, Mountain View, CA</textarea>
                       <button class="btnSub"type="submit" ><img src="icons/icons8-replace-50 2.png"></button>
                       </form>
                       </div>

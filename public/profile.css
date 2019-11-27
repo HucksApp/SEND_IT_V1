@@ -113,6 +113,10 @@ flex-direction: column;
   align-self: center;
 
 }
+a:hover{
+  color:#fff;
+  border-bottom: solid orange;
+}
 
 .odel:hover{
   transform: scale(0.7,0.7);

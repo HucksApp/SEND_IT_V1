@@ -3,6 +3,7 @@ const bodyParser= require('body-parser');
 const passport = require('passport');
 const userModel = require('../config/db/dbModel');
 const fs = require('fs');
+const keys = require('../keys/keys');
 
 
 
@@ -518,6 +519,24 @@ if('true'== val ){return true}else{return false}
 };
 
 
+function getmap(req, res){
+if(req.session.username){
+  console.log('here');
+  userModel.userModel.findOne({username:req.session.username})
+          .then(
+            (user)=>{
+          let pickup ;
+          if(user.address){pickup=user.address;};
+            const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
+          console.log(currentDlLo );
+              res.render('map',{presentPosition:currentDlLo , pickup:pickup
+              });
+
+            })
+          }
+};
+
+
 
 
 
@@ -540,9 +559,7 @@ router.get('/logout', logout);
 router.get('/profile', profile);
 router.get('/item', getorders);
 router.get('/Admin', getAdmin);
-router.get('/map', (req,res)=>{
-  res.sendFile(__dirname+'/test/map.html')
-});
+router.get('/map', getmap);
 
 
 

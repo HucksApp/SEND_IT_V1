@@ -5,6 +5,7 @@ module.exports = {
                     googleClientSecret:'y8TnZLxuaKYNBenUQ3u4VeZF'
                   },
                   session:{cookieKey:'this-is-Hucksapp-cookiekeys'},
-                  db:{dbString:'mongodb+srv://jakehunt:biodun@appcluster-c65ti.mongodb.net/test?retryWrites=true&w=majority'}
+                  db:{dbString:'mongodb+srv://jakehunt:pussypie@cluster0-c65ti.mongodb.net/test?retryWrites=true&w=majority'},
+                  apiG:{key:'AIzaSyDoduk96MV36i6RJFgvo80FqZTFBZj2k1M'}
 
 }
