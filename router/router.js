@@ -533,7 +533,33 @@ if(req.session.username){
               });
 
             })
-          }
+          }else if(req.session.passport){
+            userModel.googleUserModel.findOneAndUpdate({id:req.session.passport.user}, {address:req.query.address})
+            .then(
+              (user)=>{
+            let pickup ;
+            if(user.address){pickup=user.address;};
+              const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
+            console.log(currentDlLo );
+                res.render('map',{presentPosition:currentDlLo , pickup:pickup
+                });
+
+              })
+
+          }else {  userModel.userModel.findOneAndUpdate({email:req.session.email}, {address:req.query.address})
+          .then(
+            (user)=>{
+          let pickup ;
+          if(user.address){pickup=user.address;};
+            const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
+          console.log(currentDlLo );
+              res.render('map',{presentPosition:currentDlLo , pickup:pickup
+              });
+
+            })
+
+
+        }
 };
 
 
