@@ -4,6 +4,8 @@ body{
   color:#fff;
   box-sizing: border-box;
   font-family:fantasy;
+  height: 100vh;
+
 }
 /***for partial nav**/
 nav{
