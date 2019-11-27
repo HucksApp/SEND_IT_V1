@@ -34,11 +34,7 @@ app.use(cookieSession({
 
   app.set('view engine', 'ejs');
   app.use(router);
-  if (process.env.NODE_ENV === 'production'){
-    app.use(express.static('public'));
-
-  };
-
+  app.use(express.static('public'));
 
 
 
