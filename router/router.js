@@ -18,36 +18,7 @@ function index(req, res){res.render('index')};
 function store(req,res){res.render('store')};
 function sign(req,res){res.render('sign', {data:req.query.data||''})};
 
-function checkout(req,res){
-  if(req.session.username){
-    userModel.userModel.findOne({username:req.session.username})
-          .then((user)=>{
-            console.log(user.order,'this is user order 1');
-          res.render('checkout',{user:user})
 
-            }
-          ).catch(err=>console.log(err))
-  } else if(req.session.passport){
-    userModel.googleUserModel.findOne({id:req.session.passport.user})
-          .then((user)=>{
-            console.log(user.order,'this is user order 1');
-          res.render('checkout',{user:user})
-
-
-          }).catch(err=>console.log(err))
-  }else if(req.session.email){
-    userModel.userModel.findOne({email:req.session.email})
-          .then((user)=>{
-            console.log(user.order,'this is user order 1');
-          res.render('checkout',{user:user})
-
-            }
-          ).catch(err=>console.log(err))
-  }else{
-     res.render('checkout',{user:['pls sign in to create order!!!!!']})
-  };
-
-};
 
 function account(req,res){
    if(req.session.username){
@@ -116,7 +87,7 @@ function newprofile(req, res){
   console.log(req.body,'req body end here');
   userModel.userModel.findOne({username:req.body.username}).then((user)=>{
     console.log(user,'result end here');
-    if(user){
+    if(user & user.password==req.body.password){
       console.log('you are a registered user');
       req.session={username:req.body.username};
       res.render('account',{user:user});
@@ -137,7 +108,7 @@ function oldprofile(req, res){
   //credential needs to be checked before determing response of profile
   userModel.userModel.findOne({email:req.body.email2}).then((user)=>{
     console.log(user);
-    if(user){
+    if(user&& user.password==req.body.password2){
       console.log('welcome user')
       req.session={email:req.body.email2};
       res.render('account',{user:user});
@@ -170,13 +141,17 @@ function check_order_out(req,res){
                   order:req.body.order,
                   delivery:false,
                   count:count,
-                  location:"on process"
+                  destination:req.body.locationd,
+                  recipientno:parseInt(req.body.phoneno),
+                  recipientname:req.body.recipientname,
+                  pickup:req.body.pickupaddress
+
                 };
               let  subdocu=user.order;
 
 
             subdocu.push(newOrder);
-            user.save();
+            user.save().then(()=>{console.log('saved')});
               })
             .catch(err=>console.log(err));
   }else if(req.session.passport){
@@ -189,13 +164,16 @@ function check_order_out(req,res){
             let count =user.order.length + 1;
 
             let newOrder =
+            {
+            order:req.body.order,
+            delivery:false,
+            count:count,
+            location:req.body.locationd,
+            recipientno:parseInt(req.body.phoneno),
+            recipientname:req.body.recipientname,
+            pickup:req.body.pickupaddress
 
-                {
-                order:req.body.order,
-                delivery:false,
-                count:count,
-                location:"on process"
-              };
+          };
             let  subdoc=user.order;
 
 
@@ -216,12 +194,16 @@ function check_order_out(req,res){
 
             let newOrder =
 
-                {
-                order:req.body.order,
-                delivery:false,
-                count:count,
-                location:"on process"
-              };
+            {
+            order:req.body.order,
+            delivery:false,
+            count:count,
+            destination:req.body.locationd,
+            recipientno:parseInt(req.body.phoneno),
+            recipientname:req.body.recipientname,
+            pickup:req.body.pickupaddress
+
+          };
             let  subdoc=user.order;
 
 
@@ -265,56 +247,6 @@ function getorders(req, res){
 
   }  else{ return;
 
-  }
-};
-
-function deleteitem(req, res){
-  console.log('in f now',req.query);
-  if(req.session.username){
-    userModel.userModel.findOne({username:req.session.username})
-            .then((user)=>{
-              const orderNo = parseInt(req.query.orderClicked);
-              console.log('in parse',req.query.orderClicked);
-              (user.order).forEach((userOrd)=>{
-                console.log('in order');
-                console.log(userOrd.count, orderNo);
-              if(userOrd.count==orderNo){
-                console.log('in delete');
-              let deletePosition =  userOrd.order.indexOf((req.query.item));
-              console.log(deletePosition);
-              userOrd.order.splice(deletePosition,1);
-              user.save();
-              }
-              })
-
-
-          })
-            .catch(err=>console.log(err));
-  }else if(req.session.passport){
-    userModel.googleUserModel.findOne({id:req.session.passport.user})
-    .then((user)=>{
-
-      let rmvitem=user.order.order.toString().replace(req.params.name+',','').split(',');
-      console.log(rmvitem);
-      user.update({order:{order:rmvitem}}).then(neworder=>console.log(neworder))
-      .catch(err=>console.log(err));
-  })
-            .catch(err=>console.log(err));
-
-  } else if(req.session.email){
-    userModel.userModel.findOne({email:req.session.email})
-    .then((user)=>{
-      console.log(user,'userrrrrrrr deleting item',req.params.name);
-
-      let rmvitem=user.order.order.toString().replace(req.params.name+',','').split(',');
-      console.log(rmvitem);
-      user.update({order:{order:rmvitem}}).then(neworder=>console.log(neworder))
-      .catch(err=>console.log(err));
-  })
-            .catch(err=>console.log(err));
-
-  }else{
-    res.redirect('sign?data=please sign up');
   }
 };
 
@@ -371,17 +303,29 @@ function deleteorder(req, res){
 function change_address(req, res){
   console.log(req.query.address);
   if(req.session.username){
-    userModel.userModel.findOneAndUpdate({username:req.session.username}, {address:req.query.address})
-            .then(result=>console.log(result,'result here'))
+    userModel.userModel.findOne({username:req.session.username})
+            .then((user)=>{
+              user.order[parseInt(req.query.count-1)].pickup=req.query.address;
+              user.save()
+            }
+          )
             .catch(err=>console.log(err));
   }else if(req.session.passport){
     userModel.googleUserModel.findOneAndUpdate({id:req.session.passport.user}, {address:req.query.address})
-            .then(result=>console.log(result))
+            .then((user)=>{
+              user.order[parseInt(req.query.count-1)].pickup=req.query.address;
+              user.save()
+            }
+          )
             .catch(err=>console.log(err));
 
   }else if(req.session.email){
     userModel.userModel.findOneAndUpdate({email:req.session.email}, {address:req.query.address})
-            .then(result=>console.log(result,'result here'))
+            .then((user)=>{
+              user.order[parseInt(req.query.count-1)].pickup=req.query.address;
+              user.save()
+            }
+          )
             .catch(err=>console.log(err));
 
   } else{
@@ -526,8 +470,8 @@ if(req.session.username){
           .then(
             (user)=>{
           let pickup ;
-          if(user.address){pickup=user.address;};
-            const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
+            const pickup =  user.order[parseInt(req.query.ord)-1].pickup;
+              const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
           console.log(currentDlLo );
               res.render('map',{presentPosition:currentDlLo , pickup:pickup
               });
@@ -538,7 +482,7 @@ if(req.session.username){
             .then(
               (user)=>{
             let pickup ;
-            if(user.address){pickup=user.address;};
+            const pickup =  user.order[parseInt(req.query.ord)-1].pickup;
               const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
             console.log(currentDlLo );
                 res.render('map',{presentPosition:currentDlLo , pickup:pickup
@@ -550,7 +494,7 @@ if(req.session.username){
           .then(
             (user)=>{
           let pickup ;
-          if(user.address){pickup=user.address;};
+          const pickup =  user.order[parseInt(req.query.ord)-1].pickup;
             const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
           console.log(currentDlLo );
               res.render('map',{presentPosition:currentDlLo , pickup:pickup
@@ -579,7 +523,6 @@ function logout(req, res){
 router.get('/index', index);
 router.get('/store', store);
 router.get('/account', account);
-router.get('/checkout', checkout);
 router.get('/sign', sign);
 router.get('/logout', logout);
 router.get('/profile', profile);
@@ -611,8 +554,6 @@ router.post('/admin_order_status_update', urlencodedParser, replaceOrderStatus);
 router.put('/newaddress', change_address);
 
 //delete requests
-
-router.delete('/delete', deleteitem);
 router.delete('/deleteorder/:del', deleteorder);
 
 module.exports=router;

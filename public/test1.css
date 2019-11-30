@@ -5,21 +5,56 @@ body{
   box-sizing: border-box;
   font-family:fantasy;
   height: 100vh;
+  font-weight:bolder;
 
 }
 /***for partial nav**/
 nav{
-  color:orange;
-  font-size: 15px;
-  background-color:#fff;
+  color:#fff;
+  font-size: 1.1em;
+  background-color:#000;
+display:flex;
+position: fixed;
+z-index: 1;
+text-align: center;
+justify-content:space-around;
+width: 100%;
+font-weight: bold;
+}
+nav.open{
   display:flex;
 }
 
-nav div{
+nav>*{
   flex:1;
   display:flex;
-  font:10px;
+  border-width:thin;
+  justify-content:center;
+  align-items: center;
+  align-self: center;
+  border-color:rgba(255,255,255, 0.2);
+  border-style: solid;
+  display:inline-block;
+  border-right:hidden;
+
 }
+nav a:hover{
+  border:solid thin purple;
+}
+
+
+
+nav span{
+  border:hidden;
+}
+nav p a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
 
 .user_nav {
   margin-left:30%;
@@ -35,33 +70,47 @@ nav div p:hover{
 }
 a{
   text-decoration: none;
-  color:orange;
+  color:#fff;
+
+}
+a{
+  border:
 }
 
 /**************************/
 .wrapper{
-    background-image:-webkit-linear-gradient(170deg,#ffecd2 20%,#fcb69f 80%,#ffc3a0 100%);
-}
-header{
+  background-attachment: fixed;
+    background-image:url('/icons/chuttersnap-xewrfLD8emE-unsplash.jpg')
 }
 
 hgroup{
   position:absolute;
   left:85%;
   top:40px;
+
 }
 
 section{
   text-align: center;
+  display: flex;
+  color:#000;
+  flex-direction:column;
+  background-color: rgba(219,225,221, 0.8);
+
+  height: 100vh;
+}
+section h2, section p{
+  background-color:rgba(255,225,255, 0.1);
 }
 
-section div:first-child{
-  float:left;
-  width:20%;
-  font-size:1.5em;
-  margin-left: 15%;
+section>*{
+  height:40vh;
 
-
+}
+section div:last-child{
+  color:purple;
+  font-size:1.1em;
+  font-weight: bold;
 }
 .menubtn:hover{
 transform:scale(0.8,0.8);
@@ -73,19 +122,24 @@ cursor:pointer;
   color:orange;
   background-color:rgba(255, 255,255, 0.6);
   text-align: center;
+  display:flex;
 
 
 }
 
 #in-nav div{
-  border: solid 2px #fff;
+  border: solid thin rgba(255,255,255, 0.2);
+  background-color: #000;
   box-shadow: 1px 1px 1px 1px #000;
+  color:#000;
+  flex:1;
 }
 
+#in-nav >*:hover a{
+  color: purple !important;
+}
 #in-nav div:hover{
-  background-color: #fff;
-  box-shadow: 2px 3px 2px 2px #000;
-
+  border:solid thin purple;
 }
 .menuclosed{
   display: flex;
@@ -98,12 +152,10 @@ cursor:pointer;
 .menuclosed.togmenu{
   display: flex;
   flex-direction: column;
-      height: 80vh;
+      height: 100vh;
       overflow: hidden;
       transition:height 4s;
 }
-
-
 
 
 @-webkit-keyframes name {
@@ -125,18 +177,58 @@ section div h2{
 -webkit-animation-timing-function: ease-in;
 }
 
+.store_wrapper{
+  height:100vh;
+}
+
+
+header h3:first-child{
+  height: 20vh;
+  padding-top: 20vh;
+  text-align:center;
+}
+.top{
+  padding-top: 5vh;
+}
+
+form{
+
+}
+
 /*********footer design************/
 
 footer{
   display:flex;
+  background-color: #000;
   justify-content: space-around;
   font-family: inherit;
-  color: orange;
+  color:#fff;
+  height: 20vh;
 }
 
-footer img:hover{
+footer div{
+  border: solid thin rgba(255,255,255, 0.2);
+  flex:1;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+footer div:hover{
   transform:scale(0.9, 0.9);
   cursor: pointer;
+  border: solid thin purple;
+
+}
+
+.footer{
+  text-align: center;
+  color:purple;
+  background-color: #000;
+  height: 15vh;
+  vertical-align: bottom;
 }
 
 /***********************/

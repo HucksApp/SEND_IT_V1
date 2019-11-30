@@ -18,9 +18,10 @@ passport.deserializeUser((id, done)=>{
 
 passport.use( new GoogleStrategy({
 
-            callbackURL:'/andela/google/redirect',
+            callbackURL:'http://blooming-waters-53900.herokuapp.com'+'/andela/google/redirect',
             clientID:  keys.googleKeys.googleClientID,
-            clientSecret:keys.googleKeys.googleClientSecret
+            clientSecret:keys.googleKeys.googleClientSecret,
+            proxy:true
 
 
   }, (acessToken, refreshToken, profile, done )=>{

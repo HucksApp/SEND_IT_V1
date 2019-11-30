@@ -7,75 +7,33 @@
   </head>
   <body>
     <div  class="store_wrapper">
+
       <!--inject the nav-->
       <%include partials/nav %>
-       <div  class="store-wrapper">
-         <span><button  style="color:#fff;background:orange;"class="store_out order" >Add Order</button></span>
-        <span><div id='wrapcount'></div></span>
-        <div class="items-wrapper">
-          <div class="arrow"><img class="store_out" src="icons/icons8-back-to-50.png"></div>
-          <div id='item1' class="item">
-            <div class="names_values">
-              <!--to be replaced with the actual item -->
-              <h3>$145</h3>
-              <p>stock 1</p>
-            </div>
-            <div class="description">
-              <p>this is the information and  discription of the item</p>
-            </div>
-          </div>
-          <div id="item2" class="item">
-            <!--to be replaced with the actual item -->
-            <div class="names_values">
-              <h3>$250</h3>
-              <p>stock 2</p>
-            </div>
-            <div class="description">
-                <p>this is the information and  discription of the item</p>
-            </div>
-          </div>
-          <div id="item3" class="item">
-            <!--to be replaced with the actual item -->
-            <div class="names_values">
-              <h3>$348</h3>
-              <p>stock 3</p>
-            </div>
-            <div class="description">
-                <p>this is the information and  discription of the item</p>
-            </div>
-          </div>
-          <div id="item4" class="item other">
-            <!--to be replaced with the actual item -->
-            <div class="names_values">
-              <h3>$346</h3>
-              <p>stock 4</p>
-            </div>
-            <div class="description">
-                <p>this is the information and  discription of the item</p>
-            </div>
-          </div>
-          <div id="item5" class="item other">
-            <!--to be replaced with the actual item -->
-            <div class="names_values">
-              <h3>$373</h3>
-              <p>stock 5</p>
-            </div>
-            <div class="description">
-                <p>this is the information and  discription of the item</p>
-            </div>
-          </div>
-          <div id="item6" class="item other">
-            <!--to be replaced with the actual item -->
-            <div class="names_values">
-              <h3>$398</h3>
-              <p>stock 6</p>
-            </div>
-            <div class="description">
-                <p>this is the information and  discription of the item</p>
-            </div>
-          </div>
 
-          <div class="arrow"><img class="store_out" src="icons/icons8-next-page-50.png"></div>
+       <div  class="store-wrapper wrapper">
+         <form  id="order" name="form" action="/checkout" method="post">
+           <div class="im">
+              <div id="message"></div>
+           <div class="name">
+             <label for="pickupaddress" >Pickup:</label>
+             <input  name="pickupaddress" type="text" class="name" required="required" placeholder="Enter pick up location"/>
+           </div>
+           <div class="name">
+             <label for="name" >Recipient Name:</label>
+             <input  name="name" type="text" class="name" required="required" placeholder="Enter the recipient name"/>
+           </div>
+           <div class="name">
+             <label for="destination" >Destination Address:</label>
+             <input  name="destination" type="text" class="name" required="required" placeholder="Enter the address"/>
+           </div>
+           <div class="name">
+             <label for="phoneno" >Recipient Phone No:</label>
+             <input  name="phoneno" type="number" class="name" required="required" placeholder="Enter recipient phone Number"/>
+           </div>
+           <button type="submit">submit Order</button>
+         </div>
+         </form>
         </div>
 
       </div>

@@ -8,7 +8,7 @@
   </head>
   <body>
     <!--item and order edit page-->
-    <%include partials/nav%>
+    <%include partials/logout%>
     <section>
       <div class="nav_container">
         <div>
@@ -22,7 +22,7 @@
 
 
               <article class="order <%=i.count%>" >
-              <p>ORDER <span><%=i.count%></span></p>
+              <p>ORDER <span id="count"><%=i.count%></span></p>
               <p><a href="/map?ord=<%=i.count%>">Location:<%=i.location%></a><p>
                 <p><%=i.date%><p>
               <%if (user.order.delivery==false){%>
@@ -32,6 +32,22 @@
                 <p>Pending</p><%}%>
               <img class="odel" src="icons/icons8-delete-60.png">
             </article>
+            <div class="info">
+            <div>Pickup: <%=i.pickup%></div>
+            <div>Recipient No: <%=i.recipentno%></div>
+            <div>Delivery Destination: <%=i.destination%></div>
+            <div>Recipient Name:<%=i.recipientname%></div>
+            <div class=" adress">
+              <h4>Pickup Point</h4>
+              <p class='shown'><%=i.pickup%><!--to be replced with a text area on click for edit--></p>
+              <img class="edit" src="icons/icons8-save-as-50.png">
+              <div class="update hidden">
+                <textarea  class="addressedit" rows="8" cols="30">change pickup point</textarea>
+                <img  class='updatei' src="icons/icons8-replace-50.png">
+              </div>
+
+            </div>
+          </div>
 
           </li>
 

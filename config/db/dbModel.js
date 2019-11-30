@@ -7,14 +7,17 @@ const Schema = mongoose.Schema;
 
 var itemSchema = new Schema({
 
-              order:Array,
               delivery:{
                 type:Boolean,
                 default:false
               },
               date:{type:Date,default:Date.now},
               count:Number,
-              location:{type:String}
+              location:{type:String,default:"ware House"},
+              destination:{type:String},
+              pickup:{type:String},
+              recipientno:{type:Number},
+              recipientname:{type:String}
 
 });
 
@@ -65,11 +68,11 @@ let userSchema = new Schema({
 
 
 
- let googleUserModel = mongoose.model('google_user_reg', googleUserSchema);
+ let googleUserModel = mongoose.model('google_user_Sendit', googleUserSchema);
 
 
 
-   var userModel =  mongoose.model('Andelappuser',userSchema);
+   var userModel =  mongoose.model('Andelappuser_sendit',userSchema);
 
    //let itemModel=mongoose.model('items_order', itemSchema);
 

@@ -1,35 +1,32 @@
 //get dom elements
-const counter =document.getElementById('wrapcount');
-const items= document.getElementsByClassName('item');
-const arrows= document.getElementsByClassName('arrow');
-const orderBtn=document.querySelector('.order');
-
-
-
 
 //store data
-var count = count || 1;
-let cartitems=[];
-let checkcount=0;
-let eachitem = [...items];
-let order={order:cartitems};
+const form=document.getElementById('order');
+const locationi =form.destination;
+const pickupaddressi =form.pickupaddress;
+const phonenoi =form.phoneno;
+const recipient =form.name;
+
 
 
 //item engine
- function pick(e){
-  counter.innerHTML=`<span>ITEMS: </span><span>${count}</span>`;
-
-  count++;
-
-  let cartitem =this.id;
-  cartitems.push(cartitem);
-  //debug
-  console.log(cartitems);
-};
 
 
-function additem(){
-fetch('/checkout?data='+cartitems,{
+
+function addorder(e){
+  e.preventDefault();
+
+  const order ={
+      locationd: locationi.value,
+      pickupaddress: pickupaddressi.value,
+      phoneno:phonenoi.value,
+      recipientname:recipient.value
+  };
+
+  console.log(order);
+
+
+fetch('/checkout',{
 
           method: 'POST',
           headers:{
@@ -42,42 +39,27 @@ fetch('/checkout?data='+cartitems,{
 })
 .then((result)=>console.log(result))
   .catch((err)=>{console.log(err); return;})
-location.reload();
-};
+  locationi.value="";
+  pickupaddressi.value="";
+  phonenoi.value="";
+  recipient.value="";
 
-
-
-function nextset(e){
-  console.log('clicked me');
-  for (i of eachitem){
-    var checkcount=checkcount || 0;
-    if(!i.classList.contains('other')){
-      checkcount = checkcount++;
-      console.log(i);
-      setTimeout(i.classList.add('other'), 3000);
-      i.classList.remove('newset');
-      console.log(i.style.display);
-
-    }else if(i.classList.contains('other')){
-      setTimeout(i.classList.remove('other'), 3000);
-      i.classList.add('newset');
-      console.log('clicked me to flex');
-    }
-
-  }
+document.getElementById('message').textContent="check out orders in basket";
 
 };
-
-
-
-
-Array.from(items).forEach((item)=>{
-  item.addEventListener('click', pick);
+/*
+//nav toggle
+const hov = document.getElementsByClassName('name');
+const nav = document.getElementsByClassName('nav');
+hov[0].addEventListener('mouseover',()=>{
+  console.log('weeeeee');
+if(!nav[0].classList.contains('open')){
+  nav[0].classList.add('open')
+}else{nav[0].classList.remove('open')}
 });
 
+//
 
-Array.from(arrows).forEach((arrow)=>{
-  arrow.addEventListener('click', nextset);
-});
+*/
 
-orderBtn.addEventListener('click',additem);
+form.addEventListener('submit',addorder);

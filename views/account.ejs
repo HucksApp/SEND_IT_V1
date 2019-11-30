@@ -5,24 +5,59 @@
     <title><img src="">Account</title>
     <style>
       article{
-        background-image: -webkit-linear-gradient(170deg,#ffecd2 20%,#fcb69f 80%,#ffc3a0 100%);
+        background-attachment: fixed;
+          background-image:url('/icons/chuttersnap-xewrfLD8emE-unsplash.jpg');
         box-sizing: border-box;
         font-family: fantasy;
       }
       /***for partial nav**/
       nav{
-        color:orange;
-        font-size: 15px;
-        font-family: fantasy;
-        background-color:#fff;
+        color:#fff;
+        font-size: 1.1em;
+        background-color:#000;
+      display:flex;
+      position: fixed;
+      z-index: 1;
+      text-align: center;
+      justify-content:space-around;
+      width: 100%;
+      font-weight: bold;
+      color:#fff;
+      }
+      nav.open{
         display:flex;
       }
 
-      nav div{
+      nav>*{
         flex:1;
         display:flex;
-        font:10px;
+        border-width:thin;
+        justify-content:center;
+        align-items: center;
+        align-self: center;
+        border-color:rgba(255,255,255, 0.2);
+        border-style: solid;
+        display:inline-block;
+        border-right:hidden;
+
       }
+      nav a:hover{
+        border:solid thin purple;
+      }
+
+
+
+      nav span{
+        border:hidden;
+      }
+      nav p a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+
+
 
       .user_nav {
         margin-left:30%;
@@ -38,18 +73,22 @@
       }
       a{
         text-decoration: none;
-        color:orange;
+        color:#fff;
+
+      }
+      a{
+        border:
       }
 
       /**************************/
 
 
             .acc_wrapper{
-              background-color: rgba(255, 255, 255, 0.4);
+              background-color: rgba(219,225,221, 0.8);
               text-transform:capitalize;
               border:solid rgba(255, 255, 255, 0.5);
               border-radius:7px;
-              color:#fff;
+              color:#000;
               padding:5% 10%;
               font-size:1.3em;
               margin: 0% 10%;
@@ -61,7 +100,8 @@
 
       .acc_wrapper span{
         font-size: 0.7em;
-        color:orange;
+        color:purple;
+        font-weight: bold;
         margin-left: 13%;
         text-align: center;
         width:100%;
@@ -93,20 +133,39 @@
 
       footer{
         display:flex;
+        background-color: #000;
         justify-content: space-around;
         font-family: inherit;
-        color: orange;
+        color:#fff;
+        height: 20vh;
       }
 
-      footer img:hover,.toggle_edit:hover{
+      footer div{
+        border: solid thin rgba(255,255,255, 0.2);
+        flex:1;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+
+      }
+
+
+      footer div:hover{
         transform:scale(0.9, 0.9);
+        cursor: pointer;
+        border: solid thin purple;
+
+      }
+
+      .footer{
+        text-align: center;
+        color:purple;
+        background-color: #000;
+        height: 15vh;
+        vertical-align: bottom;
       }
 
       /***********************/
-
-       .toggle_edit:active{
-         transform:scale(0.8, 0.8);
-       }
 
       .acc_wrapper  div p+div{
         background-color: rgba(255, 255, 255, 0.5);
@@ -116,7 +175,6 @@
 
        a{
          text-decoration: none;
-         color: orange;
        }
 
     </style>
@@ -124,17 +182,19 @@
   </head>
 
   <body>
-    <% include partials/nav %>
+    <% include partials/logout %>
+
+
     <article>
     <!--inject data into the span_tag from sign up-->
     <aside class="acc_wrapper">
       <div>
         <p>name</p>
         <div>
+          <%if (user){%>
         <%if(user.username) {%><span class="val"><%=user.username%></span>
         <%}else if (user.displayName){%><span><%=user.displayName%><span><%}else{%>
           <span>empty</span><%}%>
-        <span><img class="toggle_edit" src="icons/icons8-replace-50.png"></span>
       </div>
       </div>
       <div>
@@ -142,7 +202,6 @@
         <div>
           <%if(user.address) {%><span class="val"><%=user.address%></span>
           <%}else {%><span>empty<span><%}%>
-        <span><img class="toggle_edit" src="icons/icons8-replace-50.png"></span>
       </div>
       </div>
       <div>
@@ -150,7 +209,6 @@
         <div>
           <%if(user.email) {%><span class="val"><%=user.email%></span>
           <%}else {%><span>empty<span><%}%>
-        <span><img class="toggle_edit" src="icons/icons8-replace-50.png"></span>
       </div>
       </div>
       <div>
@@ -158,20 +216,18 @@
         <div>
           <%if(user.phoneno) {%><span class="val"><%=user.phoneno%></span>
           <%}else {%><span>empty<span><%}%>
-        <span><img class="toggle_edit" src="icons/icons8-replace-50.png"></span>
       </div>
       </div>
       <div>
         <p>password</p>
         <div>
           <%if(user.password) {%><span class="val"><%=user.password%></span>
-          <%}else {%><span>empty<span><%}%>
-        <span><img class="toggle_edit" src="icons/icons8-replace-50.png"></span>
+          <%}else {%><span>empty<span><%}%><%}%>
       </div>
       </div>
       <div>
         <p>orders</p>
-        <span><a href="/checkout">ORDER</a></span>
+        <span><a href="/profile">ORDERS</a></span>
       </div>
     </aside>
     </section>
@@ -181,7 +237,6 @@
   <script>
           //get dom elements
           const  listenAll  = document.querySelector('.acc_wrapper');
-          const  edits  = document.querySelectorAll('.toggle_edit');
           const  outPour  = document.querySelectorAll('.val');
           let entySlate = '<input class="change" type="text" width="300"/>';
           const  change  = document.querySelector('input.change');
@@ -205,11 +260,11 @@
 
           }
 
-
+/*
 
           listenAll.addEventListener('click', allowEdit);
 
-          /*edits.forEach((edit)=>{
+          edits.forEach((edit)=>{
             edit.addEventListener('click', allowEdit);
           });*/
 
