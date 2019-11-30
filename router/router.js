@@ -469,7 +469,6 @@ if(req.session.username){
   userModel.userModel.findOne({username:req.session.username})
           .then(
             (user)=>{
-          let pickup ;
             const pickup =  user.order[parseInt(req.query.ord)-1].pickup;
               const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
           console.log(currentDlLo );
@@ -481,7 +480,6 @@ if(req.session.username){
             userModel.googleUserModel.findOneAndUpdate({id:req.session.passport.user}, {address:req.query.address})
             .then(
               (user)=>{
-            let pickup ;
             const pickup =  user.order[parseInt(req.query.ord)-1].pickup;
               const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
             console.log(currentDlLo );
@@ -493,13 +491,11 @@ if(req.session.username){
           }else {  userModel.userModel.findOneAndUpdate({email:req.session.email}, {address:req.query.address})
           .then(
             (user)=>{
-          let pickup ;
           const pickup =  user.order[parseInt(req.query.ord)-1].pickup;
             const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
           console.log(currentDlLo );
               res.render('map',{presentPosition:currentDlLo , pickup:pickup
               });
-
             })
 
 
