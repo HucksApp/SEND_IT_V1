@@ -510,13 +510,13 @@ function logout(req, res){
   console.log(req.session);
   req.session=null;
   //req.logout();
-  res.redirect('/index?user=user&log=logout');
+  res.redirect('/?user=user&log=logout');
 };
 
 
 
 // get requests
-router.get('/index', index);
+router.get('/', index);
 router.get('/store', store);
 router.get('/account', account);
 router.get('/sign', sign);
