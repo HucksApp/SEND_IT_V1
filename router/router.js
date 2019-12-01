@@ -87,7 +87,7 @@ function newprofile(req, res){
   console.log(req.body,'req body end here');
   userModel.userModel.findOne({username:req.body.username}).then((user)=>{
     console.log(user,'result end here');
-    if(user & user.password==req.body.password){
+    if(user && user.password==req.body.password){
       console.log('you are a registered user');
       req.session={username:req.body.username};
       res.render('account',{user:user});
