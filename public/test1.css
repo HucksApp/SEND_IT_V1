@@ -215,7 +215,7 @@ footer div:hover{
 
 
 
-@media screen and (max-width:768px){
+@media only screen and (max-width:768px){
  /***for partial nav**/
 nav{
  background-color: #000;
