@@ -157,26 +157,6 @@ cursor:pointer;
       transition:height 4s;
 }
 
-
-@-webkit-keyframes name {
-  0%{transform:scale(1,1);}
-  20%{transform:scale(1.2,1.2);}
-  50%{transform:scale(1.5,1.5);}
-  80%{transform:scale(1.2,1.2);}
-  90%{transform:scale(1.1,1.1);}
-  100%{transform:scale(1,1);}
-
-}
-
-section div h2{
-  transform:scale(1,1);
--webkit-animation-name: name;
--webkit-animation-duration: 8s;
--webkit-animation-delay:2s;
--webkit-animation-iteration-count:3;
--webkit-animation-timing-function: ease-in;
-}
-
 .store_wrapper{
   height:100vh;
 }
@@ -232,3 +212,115 @@ footer div:hover{
 }
 
 /***********************/
+
+
+
+@media screen and (min-width:600px){
+ /***for partial nav**/
+nav{
+  color:#fff;
+  font-size: 1.1em;
+  background-color:#000;
+display:flex;
+position: fixed;
+z-index: 1;
+text-align: center;
+justify-content:space-around;
+width: 100%;
+font-weight: bold;
+}
+nav.open{
+  display:flex;
+}
+
+nav>*{
+  flex:1;
+  display:flex;
+  border-width:thin;
+  justify-content:center;
+  align-items: center;
+  align-self: center;
+  border-color:rgba(255,255,255, 0.2);
+  border-style: solid;
+  display:inline-block;
+  border-right:hidden;
+
+}
+nav a:hover{
+  border:solid thin purple;
+}
+
+
+
+nav span{
+  border:hidden;
+}
+nav p a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.user_nav {
+  margin-left:30%;
+  margin-right:0;
+
+}
+.user_nav div{
+  padding:0;
+}
+
+nav div p:hover{
+  border-bottom: solid #0a0;
+}
+a{
+  text-decoration: none;
+  color:#fff;
+
+}
+a{
+  border:
+}
+
+/**************************/ 
+/*********footer design************/
+
+footer{
+  display:flex;
+  background-color: #000;
+  justify-content: space-around;
+  font-family: inherit;
+  color:#fff;
+  height: 20vh;
+}
+
+footer div{
+  border: solid thin rgba(255,255,255, 0.2);
+  flex:1;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+footer div:hover{
+  transform:scale(0.9, 0.9);
+  cursor: pointer;
+  border: solid thin purple;
+
+}
+
+.footer{
+  text-align: center;
+  color:purple;
+  background-color: #000;
+  height: 15vh;
+  vertical-align: bottom;
+}
+
+/***********************/
+}

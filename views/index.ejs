@@ -10,7 +10,11 @@
     <link href="test1.css" rel="stylesheet" type="text/css"/ >
   </head>
   <body>
-      <% include partials/nav %>
+    <%if (validUser) {%>
+      <%include partials/nav%>
+    <%}else {%>
+      <%include partials/logout%>
+    <%}%>
     <!--inject the navigation at this point-->
     <div class="wrapper">
       <header>
@@ -20,18 +24,26 @@
           </p>
           <!--hidden in the menu-->
           <div class="menuclosed" id="in-nav">
-            <div >
+                <%if (validUser) {%>
+                  <div >
+                    <a href="/logout">
+                      <h3>Logout</h3>
+                    </a>
+                  </div>
+                  <%}else {%>
+              <div>      
             <a href="/sign">
               <h3>Sign in</h3>
               <p>Already a user </p>
             </a>
             </div>
             <div>
-            <a href="sign">
+            <a href="/sign">
               <h3>Sign up</h3>
               <p> for free</p>
             </a>
             </div>
+                <%}%>
           </div>
         </hgroup>
         </header>
@@ -46,7 +58,7 @@
       </section>
       <!--inject the social footer-->
     </div>
-    <%include partials/socials %>
+    <%include partials/socials%>
     <script src="fronthandeler/live.js"></script>
   </body>
 </html>

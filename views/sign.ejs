@@ -7,9 +7,8 @@
   </head>
   <body>
     <!--inject nav-->
-    <% include partials/nav %>
-
-    <p><%=data%><p>
+    <% include partials/logout%>
+    <p>Hucksapp</p>
     <section>
       <div id="signup">
         <form action="/newuser" name="signup" method="post">
@@ -46,6 +45,7 @@
       </div>
       <div id="signin">
         <fieldset>
+            <p style="color:red;"><%=data%><p>
           <legend>Already a User</legend>
         <form method="post" action="/olduser" id="signin-form" name="signin-form">
           <div >

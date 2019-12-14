@@ -14,7 +14,13 @@ const jsonParser= bodyParser.json();
 
 
 // router eng
-function index(req, res){res.render('index')};
+function index(req, res){
+if(req.session.populated){
+  res.render('index',{validUser:true})
+}else{
+  res.render('index', {validUser:false})
+}
+};
 function store(req,res){res.render('store')};
 function sign(req,res){res.render('sign', {data:req.query.data||''})};
 
@@ -52,7 +58,6 @@ function profile(req, res){
   if(req.session.username){
     userModel.userModel.findOne({username:req.session.username})
           .then((user)=>{
-            console.log(user.order,'this is user order 1');
           res.render('profile',{user:user})
 
             }
@@ -60,7 +65,6 @@ function profile(req, res){
   } else if(req.session.passport){
     userModel.googleUserModel.findOne({id:req.session.passport.user})
           .then((user)=>{
-            console.log(user.order,'this is user order 1');
           res.render('profile',{user:user})
 
 
@@ -68,7 +72,6 @@ function profile(req, res){
   }else if(req.session.email){
     userModel.userModel.findOne({email:req.session.email})
           .then((user)=>{
-            console.log(user.order,'this is user order 1');
           res.render('profile',{user:user})
 
             }
@@ -83,38 +86,33 @@ function profile(req, res){
 
 
 function newprofile(req, res){
-
-  console.log(req.body,'req body end here');
-  userModel.userModel.findOne({username:req.body.username}).then((user)=>{
-    console.log(user,'result end here');
-    if(user && user.password==req.body.password){
-      console.log('you are a registered user');
-      req.session={username:req.body.username};
-      res.render('account',{user:user});
+  userModel.userModel.findOne({email:req.body.email}).then((user)=>{
+        if(user && (user.password==req.body.password || user.phoneno==req.body.phoneno)){
+          let data= 'pls sign in!, You have an account with us'
+          res.status(300).redirect('sign?data='+data)
+    }else if(user){
+      let data= 'pls sign in!,the email is registered'
+      res.status(300).redirect('sign?data='+data)      
+      
     }else{
       const newUser = new userModel.userModel(req.body);
-  newUser.save().then((user)=>{console.log('saved',user );
+  newUser.save().then((user)=>{
   req.session={username:req.body.username};
   res.render('account',{user:user});
 }).catch(err=>console.log(err))
     };
   }).catch((err)=> {console.log(err);return });
-
 };
 
 
 function oldprofile(req, res){
-  console.log(req.body);
   //credential needs to be checked before determing response of profile
   userModel.userModel.findOne({email:req.body.email2}).then((user)=>{
-    console.log(user);
     if(user&& user.password==req.body.password2){
-      console.log('welcome user')
       req.session={email:req.body.email2};
       res.render('account',{user:user});
     }else{
-      console.log('pls register');
-      let data='pls register'
+      let data='Invalid User, Please check password or sign up first!!!!'
       res.status(300).redirect('sign?data='+data);
   }}).catch((err)=>{console.log(err); return});
 
@@ -122,17 +120,10 @@ function oldprofile(req, res){
 
 
 function check_order_out(req,res){
-  console.log(req.body,'this is rq');
-  console.log(req.body.order,"this is what you are looking for");
   if(req.session.username){
     userModel.userModel.findOne({username:req.session.username})
             .then(
               (user)=>{
-                console.log(req.body);
-                console.log(user);
-
-              console.log('this is user .order',user.order);
-
             let count =user.order.length+1;
 
               let newOrder =
@@ -157,10 +148,6 @@ function check_order_out(req,res){
   }else if(req.session.passport){
     userModel.googleUserModel.findOne({id:req.session.passport.user})
             .then((user)=>{
-              console.log(req.body);
-              console.log(user);
-
-            console.log('this is user .order',user.order);
             let count =user.order.length + 1;
 
             let newOrder =
@@ -186,10 +173,6 @@ function check_order_out(req,res){
   }else if(req.session.email){
     userModel.userModel.findOne({email:req.session.email})
             .then((user)=>{
-              console.log(req.body);
-              console.log(user);
-
-            console.log('this is user .order',user.order);
             let count =user.order.length+1;
 
             let newOrder =
@@ -223,16 +206,14 @@ function getorders(req, res){
   if(request.session.username){
     userModel.userModel.findOne({username:req.session.username})
             .then(
-              (result)=>{console.log(result.order);
+              (result)=>{
                 res.render('checkout',{order:result.order})
-
-
 
             }).catch(err=>console.log(err));
   }else if(req.session.passport){
     userModel.googleUserModel.findOne({id:req.session.passport.user})
             .then(
-              (result)=>{console.log(result.order);
+              (result)=>{
                 res.render('checkout',{order:result.order})
 
             }).catch(err=>console.log(err));
@@ -240,7 +221,7 @@ function getorders(req, res){
   }else if(request.session.email){
     userModel.userModel.findOne({email:req.session.email})
             .then(
-              (result)=>{console.log(result.order);
+              (result)=>{
                 res.render('checkout',{order:result.order})
 
             }).catch(err=>console.log(err));
@@ -254,7 +235,6 @@ function getorders(req, res){
 function deleteorder(req, res){
   let delOrd= parseInt(req.params.del);
   if(req.session.username){
-    console.log(req.params.del);
     userModel.userModel.findOne({username:req.session.username})
             .then((user)=>{
       user.order.forEach((ord)=>{
@@ -301,7 +281,6 @@ function deleteorder(req, res){
   }
 };
 function change_address(req, res){
-  console.log(req.query.address);
   if(req.session.username){
     userModel.userModel.findOne({username:req.session.username})
             .then((user)=>{
@@ -311,7 +290,7 @@ function change_address(req, res){
           )
             .catch(err=>console.log(err));
   }else if(req.session.passport){
-    userModel.googleUserModel.findOneAndUpdate({id:req.session.passport.user}, {address:req.query.address})
+    userModel.googleUserModel.findOne({id:req.session.passport.user})
             .then((user)=>{
               user.order[parseInt(req.query.count-1)].pickup=req.query.address;
               user.save()
@@ -320,7 +299,7 @@ function change_address(req, res){
             .catch(err=>console.log(err));
 
   }else if(req.session.email){
-    userModel.userModel.findOneAndUpdate({email:req.session.email}, {address:req.query.address})
+    userModel.userModel.findOne({email:req.session.email})
             .then((user)=>{
               user.order[parseInt(req.query.count-1)].pickup=req.query.address;
               user.save()
@@ -342,21 +321,14 @@ fs.readFile('./keys/admin.json','utf-8',(err, admin)=>{
 
 if (err){throw err;}
 
-  console.log(JSON.parse(admin));
-  console.log(req.body);
-
   const adminCred= JSON.parse(admin);
-  console.log(adminCred.Admin.email,req.body.email );
-  console.log(adminCred.Admin.password,req.body.password);
     if(adminCred.Admin.email===req.body.email && adminCred.Admin.password.type===req.body.password){
-      console.log('admin here');
 
       userModel.userModel.find({})
       .then((andUsers)=>{
         userModel.googleUserModel.find({}).then((gogUsers)=>{
           let andusers=[...andUsers];
           let gogusers=[...gogUsers];
-          console.log('this is andusers ',Array.isArray(andusers),'this is gogusers',Array.isArray(gogusers))
           const allData ={admin:adminCred, andUsers:andusers, gogUsers:gogusers};
           res.render('admin',{allData:allData});
         })
@@ -380,7 +352,6 @@ function getAdmin(req, res){
     userModel.googleUserModel.find({}).then((gogUsers)=>{
       let andusers=[...andUsers];
       let gogusers=[...gogUsers];
-      console.log('this is andusers ',Array.isArray(andusers),'this is gogusers',Array.isArray(gogusers))
       const allData ={admin:adminCred, andUsers:andusers, gogUsers:gogusers};
       res.render('admin',{allData:allData});
     }).catch(err=>console.log(err));
@@ -393,17 +364,12 @@ function getAdmin(req, res){
 
 
 function replaceLocation(req, res){
-console.log(req.query);
-console.log(req.body);
 const locationOrder= req.query.updated.split(" ");
 let uIdentification =locationOrder[0].toString();
 let uOrdCount=parseInt(locationOrder[1]);
-console.log(uIdentification);
-console.log(uOrdCount);
 if (uIdentification.indexOf('@')!== -1){
           userModel.userModel.findOne({email:uIdentification}).then(
             (user)=>{
-              console.log(user);
               (user.order[uOrdCount-1]).location = req.body.location;
               user.save();
 
@@ -414,7 +380,6 @@ if (uIdentification.indexOf('@')!== -1){
 }else{
   userModel.googleUserModel.findOne({id:uIdentification}).then(
     (user)=>{
-      console.log(uOrdCount);
       user.order[uOrdCount-1].location = req.body.location;
         user.save();
         res.redirect('back');
@@ -425,16 +390,13 @@ if (uIdentification.indexOf('@')!== -1){
 
 
 function replaceOrderStatus(req, res){
-  console.log(req.query);
   const orderStatus= req.query.updated.split(" ");
   let uIdentification =orderStatus[0].toString();
   let uOrdCount=parseInt(orderStatus[1]);
   if (uIdentification.indexOf('@')!== -1){
           userModel.userModel.findOne({email:uIdentification}).then(
             (user)=>{
-              console.log(req.body.status);
               (user.order[uOrdCount-1]).delivery = parseBool(req.body.status);
-              console.log(parseBool(req.body.status))
               user.save();
 
               res.redirect('back');
@@ -444,8 +406,6 @@ function replaceOrderStatus(req, res){
 }else{
   userModel.googleUserModel.findOne({id:uIdentification}).then(
     (user)=>{
-      console.log(req.body.status);
-      console.log((user.order[uOrdCount-1]));
       (user.order[uOrdCount-1]).delivery = parseBool(req.body.status);
       user.save();
 
@@ -465,13 +425,11 @@ if('true'== val ){return true}else{return false}
 
 function getmap(req, res){
 if(req.session.username){
-  console.log('here');
   userModel.userModel.findOne({username:req.session.username})
           .then(
             (user)=>{
             const pickup =  user.order[parseInt(req.query.ord)-1].pickup;
               const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
-          console.log(currentDlLo );
               res.render('map',{presentPosition:currentDlLo , pickup:pickup
               });
 
@@ -482,7 +440,6 @@ if(req.session.username){
               (user)=>{
             const pickup =  user.order[parseInt(req.query.ord)-1].pickup;
               const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
-            console.log(currentDlLo );
                 res.render('map',{presentPosition:currentDlLo , pickup:pickup
                 });
 
@@ -493,7 +450,6 @@ if(req.session.username){
             (user)=>{
           const pickup =  user.order[parseInt(req.query.ord)-1].pickup;
             const currentDlLo =  user.order[parseInt(req.query.ord)-1].location;
-          console.log(currentDlLo );
               res.render('map',{presentPosition:currentDlLo , pickup:pickup
               });
             })
@@ -502,7 +458,54 @@ if(req.session.username){
         }
 };
 
+function updateUserInfos(req, res){
+  if(req.session.username){
+    userModel.userModel.findOne({username:req.session.username})
+            .then((user)=>{
+               let data = req.body.classVal;     
+               const contxt = req.body.contxt;
+               validate(data,user,contxt);
+              user.save()
+            }
+          )
+            .catch(err=>console.log(err));
+  }else if(req.session.passport){
+    userModel.googleUserModel.findOne({id:req.session.passport.user})
+            .then((user)=>{
+              let data = req.body.classVal;     
+              const contxt = req.body.contxt;
+              validate(data,user,contxt);
+              user.save()
+            }
+          )
+            .catch(err=>console.log(err));
 
+  }else if(req.session.email){
+    userModel.userModel.findOne({email:req.session.email})
+            .then((user)=>{
+              let data = req.body.classVal;     
+              const contxt = req.body.contxt;
+              validate(data,user,contxt);
+              user.save();
+            }
+          )
+            .catch(err=>console.log(err));
+
+  }
+}
+
+
+function validate(data,user,contxt){
+if(data=='username'){
+user.username =contxt;
+}else if(data=='password'){
+  user.password =contxt;
+}else if(data=='phoneno'){
+  user.phoneno =parseInt(contxt);
+}else if(data =='address'){
+  user.address = contxt;
+}
+};
 
 
 
@@ -533,7 +536,6 @@ router.get('/google', passport.authenticate('google',{scope:['profile']}));
 //google redirect handeler
 
 router.get('/andela/google/redirect',passport.authenticate('google'), (req, res)=>{
-  console.log(req.session);
 res.redirect('/account');
 });
 
@@ -545,6 +547,7 @@ router.post('/checkout',jsonParser, check_order_out);
 router.post('/Admin',urlencodedParser, adminPage);
 router.post('/admin_user_address_update', urlencodedParser, replaceLocation);
 router.post('/admin_order_status_update', urlencodedParser, replaceOrderStatus);
+router.post('/updateUser',jsonParser, updateUserInfos)
 
 //put request
 router.put('/newaddress', change_address);

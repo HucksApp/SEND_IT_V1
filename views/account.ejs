@@ -166,6 +166,10 @@
       }
 
       /***********************/
+      button:hover{
+        cursor:pointer;
+        background-color:#f00
+      }
 
       .acc_wrapper  div p+div{
         background-color: rgba(255, 255, 255, 0.5);
@@ -182,7 +186,7 @@
   </head>
 
   <body>
-    <% include partials/logout %>
+    <% include partials/nav %>
 
 
     <article>
@@ -190,42 +194,46 @@
     <aside class="acc_wrapper">
       <div>
         <p>name</p>
-        <div>
+        <div class='username'>
           <%if (user){%>
         <%if(user.username) {%><span class="val"><%=user.username%></span>
-        <%}else if (user.displayName){%><span><%=user.displayName%><span><%}else{%>
+        <%}else if (user.displayName){%><span><%=user.displayName%></span><%}else{%>
           <span>empty</span><%}%>
+          <button>i</button>
       </div>
       </div>
       <div>
         <p>address</p>
-        <div>
+        <div class='address'>
           <%if(user.address) {%><span class="val"><%=user.address%></span>
-          <%}else {%><span>empty<span><%}%>
+          <%}else {%><span>empty</span><%}%>
+            <button alt="edit" >i</button>
       </div>
       </div>
       <div>
         <p>email</p>
-        <div>
+        <div class='email'>
           <%if(user.email) {%><span class="val"><%=user.email%></span>
-          <%}else {%><span>empty<span><%}%>
+          <%}else {%><span>empty</span><%}%>
       </div>
       </div>
       <div>
         <p>phone number </p>
-        <div>
+        <div class='phoneno'>
           <%if(user.phoneno) {%><span class="val"><%=user.phoneno%></span>
-          <%}else {%><span>empty<span><%}%>
+          <%}else {%><span>empty</span><%}%>
+            <button>i</button>
       </div>
       </div>
       <div>
         <p>password</p>
-        <div>
+        <div class='password'>
           <%if(user.password) {%><span class="val"><%=user.password%></span>
-          <%}else {%><span>empty<span><%}%><%}%>
+          <%}else {%><span>empty</span></div><%}%><%}%>
+            <button>i</button>
       </div>
       </div>
-      <div>
+      <div >
         <p>orders</p>
         <span><a href="/profile">ORDERS</a></span>
       </div>
@@ -235,42 +243,58 @@
   </article>
   <%include partials/socials%>
   <script>
-          //get dom elements
-          const  listenAll  = document.querySelector('.acc_wrapper');
-          const  outPour  = document.querySelectorAll('.val');
-          let entySlate = '<input class="change" type="text" width="300"/>';
-          const  change  = document.querySelector('input.change');
-
-          function allowEdit(e){
-            e.preventDefault();
-            edits.forEach((edit)=>{
-              console.log(change);
-              if (e.target==edit && !e.target.parentNode.previousElementSibling.classList.contains('changei')){
-                console.log(change);
-          e.target.parentNode.previousElementSibling.innerHTML=entySlate;
-          e.target.parentNode.previousElementSibling.classList.add('change1');
-          console.log(change);
-        } else if(e.target==edit && e.target.parentNode.previousElementSibling.contains('changei')){
-          //need to be debugged
-          console.log('now in else');
-          e.target.parentNode.previousElementSibling.innerHTML=`<p>${change.value}</p>`;
-          e.target.parentNode.previousElementSibling.classList.remove('change1');
-        }
-            })
-
-          }
-
-/*
-
-          listenAll.addEventListener('click', allowEdit);
-
-          edits.forEach((edit)=>{
-            edit.addEventListener('click', allowEdit);
-          });*/
+      //get dom elements
+      const edits = document.getElementsByTagName('button');
+      let classVal;
 
 
+    function replaceVal(classVal,e){
+      const contxt = document.getElementById('u').value;
+      let data = {
+                contxt : contxt,
+                classVal : classVal
+      };
+      
+          fetch('/updateUser',{
+
+                              method:'POST',
+                              body:JSON.stringify(data),
+                              headers:{
+                                    "Accept":"*/*",
+                                    "Content-Type":"application/json"
+                              }
+
+               })
+              .then()
+              .catch(err=>location.reload());     
+              e.target.parentNode.firstElementChild.innerHTML=`<span class="val">${contxt}</span>`;
+    };
+
+    function allowEdit(e){
+      e.stopPropagation();
+      if(this.className =="openNow"){
+        replaceVal(classVal,e)
+      }else{
+      classVal=this.parentNode.classList.value.toLowerCase();
+      e.target.className='openNow';
+      this.parentNode.firstElementChild.innerHTML="<input id='u' type='text' style='width:70%; font-weight:bolder; border:hidden'>"
+    }
+  }
+    
 
 
-  </script>
-  </body>
+
+      [...edits].forEach((edit)=>{
+    edit.addEventListener('click',allowEdit)
+      })
+      
+      
+     
+
+     
+
+
+
+</script>
+</body>
 </html>

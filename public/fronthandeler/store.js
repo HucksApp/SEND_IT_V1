@@ -23,8 +23,6 @@ function addorder(e){
       recipientname:recipient.value
   };
 
-  console.log(order);
-
 
 fetch('/checkout',{
 
@@ -37,29 +35,15 @@ fetch('/checkout',{
 }).then((response)=>{
   console.log(response);
 })
-.then((result)=>console.log(result))
+.then()
   .catch((err)=>{console.log(err); return;})
   locationi.value="";
   pickupaddressi.value="";
   phonenoi.value="";
   recipient.value="";
 
-document.getElementById('message').textContent="check out orders in basket";
+document.getElementById('message').textContent="Order Placed!.......check orders to see the list =============>>";
 
 };
-/*
-//nav toggle
-const hov = document.getElementsByClassName('name');
-const nav = document.getElementsByClassName('nav');
-hov[0].addEventListener('mouseover',()=>{
-  console.log('weeeeee');
-if(!nav[0].classList.contains('open')){
-  nav[0].classList.add('open')
-}else{nav[0].classList.remove('open')}
-});
-
-//
-
-*/
 
 form.addEventListener('submit',addorder);

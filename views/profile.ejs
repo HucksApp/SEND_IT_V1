@@ -8,7 +8,7 @@
   </head>
   <body>
     <!--item and order edit page-->
-    <%include partials/logout%>
+    <%include partials/nav%>
     <section>
       <div class="nav_container">
         <div>
@@ -24,7 +24,7 @@
               <article class="order <%=i.count%>" >
               <p>ORDER <span id="count"><%=i.count%></span></p>
               <p><a href="/map?ord=<%=i.count%>">Location:<%=i.location%></a><p>
-                <p><%=i.date%><p>
+                <p> <%=i.date.getDay()%>/<%=i.date.getMonth()%> /<%=i.date.getFullYear()%><p>
               <%if (user.order.delivery==false){%>
               <p>Delivey status</p>
               <p>Pending</p><%}else{%>
@@ -34,7 +34,7 @@
             </article>
             <div class="info">
             <div>Pickup: <%=i.pickup%></div>
-            <div>Recipient No: <%=i.recipentno%></div>
+            <div>Recipient No: <%=i.recipientno%></div>
             <div>Delivery Destination: <%=i.destination%></div>
             <div>Recipient Name:<%=i.recipientname%></div>
             <div class=" adress">
