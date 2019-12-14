@@ -118,7 +118,6 @@ cursor:pointer;
 
 }
 #in-nav{
-  transition: -webkit-display 9s;
   color:orange;
   background-color:rgba(255, 255,255, 0.6);
   text-align: center;
@@ -133,6 +132,11 @@ cursor:pointer;
   box-shadow: 1px 1px 1px 1px #000;
   color:#000;
   flex:1;
+  height:100px;
+  display:flex ;
+  justify-content: center;
+  align-items: center;
+  al
 }
 
 #in-nav >*:hover a{
@@ -142,18 +146,17 @@ cursor:pointer;
   border:solid thin purple;
 }
 .menuclosed{
-  display: flex;
   flex-direction: column;
   height:0vh;
   overflow: hidden;
-  transition:height 4s;
+  transition:height 1s;
 }
 
 .menuclosed.togmenu{
   display: flex;
   flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
+  height:100vh;
+      overflow:scroll;
       transition:height 4s;
 }
 
@@ -169,10 +172,7 @@ header h3:first-child{
 }
 .top{
   padding-top: 5vh;
-}
-
-form{
-
+  display:none;
 }
 
 /*********footer design************/
@@ -215,77 +215,20 @@ footer div:hover{
 
 
 
-@media screen and (min-width:600px){
+@media screen and (max-width:768px){
  /***for partial nav**/
 nav{
-  color:#fff;
-  font-size: 1.1em;
-  background-color:#000;
-display:flex;
-position: fixed;
-z-index: 1;
-text-align: center;
-justify-content:space-around;
-width: 100%;
-font-weight: bold;
+ background-color: #000;
+ height:10%;
 }
-nav.open{
-  display:flex;
-}
-
-nav>*{
-  flex:1;
-  display:flex;
-  border-width:thin;
-  justify-content:center;
-  align-items: center;
-  align-self: center;
-  border-color:rgba(255,255,255, 0.2);
-  border-style: solid;
-  display:inline-block;
-  border-right:hidden;
-
-}
-nav a:hover{
-  border:solid thin purple;
-}
-
-
-
-nav span{
-  border:hidden;
-}
-nav p a{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-
-
-.user_nav {
-  margin-left:30%;
-  margin-right:0;
-
-}
-.user_nav div{
-  padding:0;
-}
-
-nav div p:hover{
-  border-bottom: solid #0a0;
-}
-a{
-  text-decoration: none;
-  color:#fff;
-
-}
-a{
-  border:
+nav p{
+  display:none;
 }
 
 /**************************/ 
+.top{
+  display:block;
+}
 /*********footer design************/
 
 footer{
