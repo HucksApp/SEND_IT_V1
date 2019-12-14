@@ -166,7 +166,7 @@ footer div:hover{
 
 @media screen and (max-width:465px){
   nav{
-    flex-flow: column;
+    flex-direction: column;
    align-items: flex-start;
   }
   nav>*{
