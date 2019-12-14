@@ -161,3 +161,25 @@ footer div:hover{
 }
 
 /***********************/
+
+
+
+@media screen and (max-width:465px){
+  nav{
+    flex-flow: column;
+    flex-wrap: wrap;
+   align-items: flex-start;
+  }
+  nav>*{
+    margin:10px;
+    min-width:200px;
+    width:90%;
+    border:thin solid rgba(255,255,255, 0.2);
+    
+  }
+
+  section{
+    padding-top:200px;
+    overflow:scroll;
+  }
+}
