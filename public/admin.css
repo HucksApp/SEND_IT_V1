@@ -138,3 +138,16 @@ a:hover{
   box-shadow: 1px 1px 1px 1px #000;
   cursor: pointer;
 }
+
+
+@media screen and (max-width:465px){
+
+.adminInfo{
+  
+display:flex;
+flex-direction: column;
+align-items: flex-end;
+
+}
+
+}

@@ -336,7 +336,7 @@ if (err){throw err;}
       }).catch( err=>{console.log(err)});
 
     }else{
-
+            res.status(301).redirect('/sign?data=Admin Only!!!')
     }
 })
 };
