@@ -181,7 +181,7 @@ footer div:hover{
     overflow:scroll;
   }
 }
-input:valid{
-  border:solid thin blue;
+input:invalid:focus{
+  box-shadow: 1px 1px 1px 1px rgba(255,00,00, 0.9) ;
 }
 
