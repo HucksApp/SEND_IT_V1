@@ -12,18 +12,18 @@
     <p>Hucksapp</p>
     <section>
       <div id="signup">
-        <form action="/newuser" name="signup" method="post">
+        <form action="/newuser"  name="signup" method="post" onsubmit="return validateForm()">
           <div class="name">
             <label for="name" >Name</label>
             <input id="name" name="username" type="text" class="name" required="required" placeholder="Enter your name"/>
           </div>
           <div >
             <label for="password" >password</label>
-            <input id="password" name="password" type="password" class="password" min="7" required="required" placeholder="enter alphanumeric of at least 7 fig"/>
+            <input id="password" name="password" type="password" class="password" required="required" placeholder="enter alphanumeric of at least 7 Characters" minlength="7"  maxlength="15"/>
           </div>
           <div class="name">
             <label for="phone_number" >Phoneno</label>
-            <input id="phone_number" name="phoneno" type="phone_number" class="phone_number" placeholder="Enter your telephone number"/>
+            <input id="phone_number" name="phoneno" type="number" class="phone_number" placeholder="Enter your telephone number"/>
           </div>
           <div>
             <label for="address" >Address</label>
@@ -38,7 +38,7 @@
             <input id="checkbox" type="checkbox" class="" required="required" placeholder="enter your email"/>
           </div>
           <div>
-            <button for="submit"><input id="submit" type="submit" /><img src=""/></button>
+            <button for="submit">submit</button>
           </div>
         <a  href="/google"><img class="icons_r"src="icons/icons8-google-plus-50.png"></a>
         </form>
@@ -48,14 +48,14 @@
         <fieldset>
             <p style="color:red;"><%=data%><p>
           <legend>Already a User</legend>
-        <form method="post" action="/olduser" id="signin-form" name="signin-form">
+        <form method="post" action="/olduser" id="signin-form" name="signin-form" >
           <div >
             <label for="email2" >email</label>
             <input id="email2" name="email2"  type="email" class="email" required="required" placeholder="enter your email"/>
           </div>
           <div >
             <label for="password2" >password</label>
-            <input id="password2" name="password2" type="password" class="password" required="required"/>
+            <input id="password2" name="password2" type="password" class="password" required="required" minlength="6" />
           </div>
           <div >
             <button  type="submit"><img  id="usersubmit"src="icons/icons8-checkmark-50.png"/></button>

@@ -181,3 +181,7 @@ footer div:hover{
     overflow:scroll;
   }
 }
+input:valid{
+  border:solid thin blue;
+}
+

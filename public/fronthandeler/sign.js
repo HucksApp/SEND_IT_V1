@@ -49,3 +49,23 @@ this.style.display="none";
   signup.addEventListener('click',fullsignup);
   signin.addEventListener('click',fullsignin);
   adminbtn.addEventListener('click',togAdminform);
+
+
+
+
+ function validateForm(){
+   let pass=document.forms['signup']['password']
+   let phone=document.forms['signup']['phoneno']
+   let name=document.forms['signup']['name']
+
+   if(name=""||name.validity.tooLong||name.validity.tooShort ){
+      alert(validationMassege);
+      return false
+   } else if(phone.validity.typeMismatch){
+    alert(validationMassege);
+    return false
+   }else if(name.validity.valueMissing){
+    alert(validationMassege);
+    return false
+   }
+ }

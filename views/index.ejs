@@ -19,7 +19,13 @@
     <!--inject the navigation at this point-->
     <div class="wrapper">
       <header>
-      <h3>Create an Account or Signin to Get Started </h3>
+       <% if (validUser){%>
+        <h3>Package Delivery To Any Place You Choose</h3>
+  
+      <%}else{%>
+        <h3>Create an Account or Signin to Get Started </h3>
+                
+        <%}%>
         <hgroup>
           <p  class="top">Menu<span><img  class="menubtn" src="icons/icons8-menu-20.png"></span>
           </p>
