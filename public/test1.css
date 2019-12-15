@@ -112,7 +112,7 @@ section div:last-child{
   font-size:1.1em;
   font-weight: bold;
 }
-.menubtn:hover{
+.top:hover{
 transform:scale(0.8,0.8);
 cursor:pointer;
 

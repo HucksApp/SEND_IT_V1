@@ -1,7 +1,7 @@
 
 
 //get the dom elements needed
-var menu = document.querySelector('.top span img');
+var menu = document.querySelector('.top');
 var menubar = document.querySelector('#in-nav');
 var body = document.querySelector('body');
 var barpairs = document.querySelectorAll('#in-nav div');
